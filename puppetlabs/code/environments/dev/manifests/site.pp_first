@@ -1,0 +1,45 @@
+node default { 
+	file { 'default':
+		path => '/root/dev.txt',
+		ensure => present
+	}
+	file { '/root/demodir':
+		ensure => 'directory',
+	}
+	file { '/root/demodir/demofile.txt':
+		ensure => 'present',
+		content => 'i am on dev machine',
+	}
+	group { 'playdevgroup':
+		gid => '1001',
+	}
+	user { 'playdevuser':
+		uid => '1001',
+		gid => '1001',
+		password => '$6$MXcdIyZOfKnS1o2Y$BLud7pJunloxUGTdezWHwtiPs4furoP5dthIFvsdPPPFT.hUGY8hQHkXO6ATnnjmukqxP2BupeGadBZ34jiud0',
+		ensure => 'present',
+	}
+	package { 'package':
+	  name => 'git',
+	  ensure => installed,
+	}
+	cron { 'logrotate':
+	  command => 'logger helloall',
+	  minute => '*/1',
+	  ensure => present,
+	}
+	host { 'google.com':
+	 ip => '8.8.8.8',
+	}
+	file { '/root/link':
+	  ensure => 'link',
+	  target => '/etc/puppetlabs/puppet',
+	}
+	package { 'rubygems':
+	  ensure => 'installed',
+	}
+	package { 'sinatra':
+	  ensure => 'installed',
+	  provider => 'gem',
+	}
+}

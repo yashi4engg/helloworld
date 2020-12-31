@@ -1,0 +1,4 @@
+---
+javadep::package: ['default-jre','default-jdk']
+javadep::tomcat: 'tomcat9'
+#hmod::hvar: 'i am from global varibale '

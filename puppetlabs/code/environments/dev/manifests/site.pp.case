@@ -1,0 +1,14 @@
+node default { 
+  $var1 = 'value1'
+  notify { "value of var1 is $ipaddress" : }
+  case $hostname {
+   'node1': { user { 'node1': ensure => present }}
+   'node2': { user { '$hostname': ensure => present }}
+  }
+  $files = ['net-toold','wget','curl']
+   $files.each |$package| {
+     package { "$package": 
+      ensure => installed
+    }
+   }
+}
